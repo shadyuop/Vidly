@@ -7,13 +7,13 @@ namespace VidlyT.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class SpecifyingGenreNameAccordingRefrence : IMigrationMetadata
+    public sealed partial class InsertingDataToGenreTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(SpecifyingGenreNameAccordingRefrence));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InsertingDataToGenreTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "202008162229576_SpecifyingGenreNameAccordingRefrence"; }
+            get { return "202008171350506_InsertingDataToGenreTable"; }
         }
         
         string IMigrationMetadata.Source
