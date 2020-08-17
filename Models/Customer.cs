@@ -11,7 +11,7 @@ namespace VidlyT.Models
         public int Id { get; set; }
 
         // Data Annotation : Rewriting the default data entry properties
-        [Required]
+        [Required(ErrorMessage = "Please enter customer's name.")]
         [StringLength(255)]
         public string Name { get; set; }
         
@@ -22,6 +22,7 @@ namespace VidlyT.Models
         public byte MembershipTypeId { get; set; }
         
         [Display(Name = "Date of Birth")]
+        [Min18YearsIfAMember]
         public DateTime? BirthDate { get; set; }
     }
 }
