@@ -37,22 +37,31 @@ namespace Vidly.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save(MovieFormViewModel viewModel)
+        public ActionResult Save(Movie Movie)
         {
-            if (viewModel.Movie.Id == 0)
+
+            if (!ModelState.IsValid)
             {
-                viewModel.Movie.AddedDate = DateTime.Now;
-                _context.Movies.Add(viewModel.Movie);
+                var viewModel = new MovieFormViewModel(Movie)
+                {
+                    Genres = _context.Genres.ToList()
+                };
+                return View("MovieForm", viewModel);
+            }
+            if (Movie.Id == 0)
+            {
+                Movie.AddedDate = DateTime.Now;
+                _context.Movies.Add(Movie);
             }
 
             else
             {
-                var movieInDb = _context.Movies.Single(c => c.Id == viewModel.Movie.Id);
+                var movieInDb = _context.Movies.Single(c => c.Id == Movie.Id);
 
-                movieInDb.Name = viewModel.Movie.Name;
-                movieInDb.GenreID = viewModel.Movie.GenreID;
-                movieInDb.ReleaseDate = viewModel.Movie.ReleaseDate;
-                movieInDb.Stock = viewModel.Movie.Stock;
+                movieInDb.Name = Movie.Name;
+                movieInDb.GenreID = Movie.GenreID;
+                movieInDb.ReleaseDate = Movie.ReleaseDate;
+                movieInDb.Stock = Movie.Stock;
                 
             }
 
@@ -78,9 +87,9 @@ namespace Vidly.Controllers
                 return HttpNotFound();
             }
 
-            var viewModel = new MovieFormViewModel()
+            var viewModel = new MovieFormViewModel(movie)
             {
-                Movie = movie,
+                
                 Genres = _context.Genres.ToList()
             };
             return View("MovieForm", viewModel);

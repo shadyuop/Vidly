@@ -13,6 +13,7 @@ namespace VidlyT.Models
         
         
         [Required(ErrorMessage = "Please enter Movie's name.")]
+        [StringLength(255)]
         public string Name { get; set; }
         
         [Required]
